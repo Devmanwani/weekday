@@ -1,52 +1,87 @@
-import React, { useState, useEffect, useRef } from 'react';
+
+import { useState, useEffect, useRef } from 'react';
 import { fetchJobsAPI, Job } from '../api';
-import { JobCard } from './JobCard';
+import JobCard from './JobCard';
 
-export const JobList = () => {
-    const [loading, setLoading] = useState(false);
-    const [jobs, setJobs] = useState<Job[]>([]);
 
-    const loadJobs = async (offset: number) => {
-        setLoading(true);
-        try {
-            // Ensure only 10 jobs are fetched initially
-            const newOffset = offset === 0 ? 0 : jobs.length;
-            const data = await fetchJobsAPI(newOffset);
-            setJobs(prevJobs => [...prevJobs, ...data]);
-        } catch (err: any) {
-            console.error(err.message);
-        }
-        setLoading(false);
+const JobList = () => {
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  
+  const observer = useRef<IntersectionObserver | null>(null);
+  const lastJobRef = useRef<HTMLDivElement | null>(null);
+
+  const loadJobs = async (offset: number) => {
+    setIsLoading(true);
+    try {
+      const data = await fetchJobsAPI(offset);
+      setJobs(prevJobs => [...prevJobs, ...data]);
+      setHasMore(data.length > 0);
+    } catch (error) {
+      console.error('Error fetching jobs:', error);
     }
-    
+    setIsLoading(false);
+  };
 
-    useEffect(() => {
-        loadJobs(0);
-    }, []);
+  useEffect(() => {
+    loadJobs(0);
+   
+  }, []);
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+  useEffect(() => {
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !isLoading && hasMore) {
+        loadJobs(jobs.length);
+      }
+    }, { threshold: 0.5 });
 
-    const handleScroll = () => {
-        if (!loading && window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-            loadJobs(jobs.length);
-        }
+    if (lastJobRef.current) {
+      observer.current.observe(lastJobRef.current);
     }
 
-    return (
-        <div>
-            {jobs.map((job) => (
-                <JobCard
-                    key={job.jdUid}
-                    title={job.jobRole}
-                    company={job.companyName}
-                    location={job.location}
-                    description={job.jobDetailsFromCompany}
-                    experience={`${job.minExp} - ${job.maxExp}`}
-                />
-            ))}
-        </div>
-    )
-}
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
+  }, [isLoading, hasMore, jobs.length]);
+  
+  
+
+  return (
+    <div className="job-list-container">
+      {jobs.map((job, index) => {
+        if (jobs.length === index + 1) {
+          return (
+            <div ref={lastJobRef} key={job.jdUid}>
+              <JobCard
+                title={job.jobRole}
+                company={job.companyName}
+                location={job.location}
+                description={job.jobDetailsFromCompany}
+                experience={`${job.minExp || ''} - ${job.maxExp || ''}`}
+              />
+            </div>
+          );
+        } else {
+          return (
+            <JobCard
+              key={job.jdUid}
+              title={job.jobRole}
+              company={job.companyName}
+              location={job.location}
+              description={job.jobDetailsFromCompany}
+              experience={`${job.minExp || ''} - ${job.maxExp || ''}`}
+            />
+          );
+        }
+      })}
+      {isLoading && <div>Loading...</div>}
+      {!hasMore && <div>No more jobs</div>}
+    </div>
+  );
+  
+};
+
+export default JobList;

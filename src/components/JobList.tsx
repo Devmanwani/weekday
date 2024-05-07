@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { fetchJobsAPI, Job } from '../api';
 import JobCard from './JobCard';
-
+import './JobList.css';
 
 const JobList = () => {
   const [jobs, setJobs] = useState<Job[]>([]);

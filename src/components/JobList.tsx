@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { fetchJobsAPI, Job } from '../api';
 import JobCard from './JobCard';
 import './JobList.css';
+import JobFilter from './JobFilter';
 
 const JobList = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -47,9 +48,13 @@ const JobList = () => {
     };
   }, [isLoading, hasMore, jobs.length]);
   
-  
+  function onFilterChange(filters: any){
+    console.log(filters);
+  }
 
   return (
+    <>
+    <JobFilter onFilterChange={onFilterChange}/>
     <div className="job-list-container">
       {jobs.map((job, index) => {
         if (jobs.length === index + 1) {
@@ -84,6 +89,7 @@ const JobList = () => {
       {isLoading && <div>Loading...</div>}
       {!hasMore && <div>No more jobs</div>}
     </div>
+    </>
   );
   
 };

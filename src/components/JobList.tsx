@@ -3,7 +3,7 @@ import { fetchJobsAPI, Job} from '../api';
 import { JobCard } from './JobCard';
 
 
-const JobList = ()=>{
+export const JobList = ()=>{
     const [loading, setLoading] = useState(false);
     const [jobs, setJobs] = useState<Job[]>([]);
     
@@ -27,8 +27,7 @@ const JobList = ()=>{
 
     return (
         <div>
-            {jobs.map((job, index) =>{
-                if(jobs.length === index + 1){
+            {jobs.map((job) =>{
                     return(
                     <JobCard
                     key={job.jdUid}
@@ -39,7 +38,7 @@ const JobList = ()=>{
                     experience = {`${job.minExp} - ${job.maxExp}`}
                     />
             )}
-        })}
+        )}
         </div>
     )
 

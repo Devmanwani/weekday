@@ -56,11 +56,13 @@ const JobList = () => {
           return (
             <div ref={lastJobRef} key={job.jdUid}>
               <JobCard
+              logo = {job.logoUrl}
                 title={job.jobRole}
                 company={job.companyName}
                 location={job.location}
                 description={job.jobDetailsFromCompany}
-                experience={`${job.minExp || ''} - ${job.maxExp || ''}`}
+                minExp = {job.minExp}
+                maxExp = {job.maxExp}
               />
             </div>
           );
@@ -72,7 +74,9 @@ const JobList = () => {
               company={job.companyName}
               location={job.location}
               description={job.jobDetailsFromCompany}
-              experience={`${job.minExp || ''} - ${job.maxExp || ''}`}
+              minExp = {job.minExp}
+              maxExp = {job.maxExp}
+              logo = {job.logoUrl}
             />
           );
         }

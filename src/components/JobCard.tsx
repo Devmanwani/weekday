@@ -7,20 +7,32 @@ interface Props {
   company: string;
   location: string;
   description: string;
-  experience: string;
+  logo:string;
+  minExp: string| number;
+  maxExp: string| number;
 }
 
-const JobCard = ({ title, company, location, description, experience }: Props) => {
+const JobCard = ({ title, company, location, description, logo, minExp, maxExp }: Props) => {
   const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
 
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
+   let jobCard = document.getElementById('job-card');
+   if(jobCard)
+   jobCard.style.height = 'fit-content';
+    
   };
 
   return (
-    <div className="job-card">
-      <h2>{title}</h2>
-      <p>Company: {company}</p>
+    <div id='job-card' className="job-card">
+      <div className='cardHeader'>
+      <img className='logo' src = {logo}></img>
+      <div className='rightHeader'>
+      <div className='company'>{company}</div>
+      {title}
+      </div>
+      </div>
+      
       <p>Location: {location}</p>
       {showFullDescription ? (
         <p>{description}</p>
@@ -30,7 +42,7 @@ const JobCard = ({ title, company, location, description, experience }: Props) =
       {!showFullDescription && (
         <button onClick={toggleDescription}>Show more</button>
       )}
-      <p>Experience Required: {experience}</p>
+      {minExp && maxExp? <p>Experience: {minExp} - {maxExp} years</p>: <p></p>}
       <button className="apply-button">Apply</button>
     </div>
   );

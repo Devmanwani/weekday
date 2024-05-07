@@ -1,11 +1,39 @@
+.cardHeader{
+  display: flex;
 
+}
+
+.company{
+  font-size:larger;
+  font-weight: 700;
+  margin-bottom:2px;
+}
+
+.rightHeader{
+  margin-left:10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+.logo{
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  
+  height: 60px;
+}
 
 .job-card {
     border: 1px solid #ccc;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 15px;
     background-color: #f9f9f9;
-    width: 300px;
+    width: 21vw;
+    height: fit-content;
+    min-height: 50vh;
+    
   }
   
   .job-card h2 {

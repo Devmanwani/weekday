@@ -1,4 +1,6 @@
 import { useState } from "react";
+import './JobFilter.css';
+import { useEffect } from "react";
 
 interface FilterValues {
     minExperience?: number;
@@ -17,9 +19,9 @@ interface Props {
 const JobFilter = ({ onFilterChange }: Props) => {
     const [filters, setFilters] = useState<FilterValues>({});
 
-    const handleSearch = () => {
+    useEffect(()=>{
         onFilterChange(filters);
-    };
+    },[filters])
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -28,9 +30,9 @@ const JobFilter = ({ onFilterChange }: Props) => {
 
     return (
         <div className="job-filter-container">
-            <h3>Filter Jobs</h3>
+            
             <div>
-                <label>Minimum Experience:</label>
+                
                 <select name="minExperience" value={filters.minExperience || ''} onChange={handleInputChange}>
                     <option value="">Select Minimum Experience</option>
                     {[...Array(10)].map((_, index) => (
@@ -40,31 +42,31 @@ const JobFilter = ({ onFilterChange }: Props) => {
             </div>
 
             <div>
-                <label>Location:</label>
-                <input type="text" name="location" value={filters.location || ''} onChange={handleInputChange} />
+               
+                <input type="text" placeholder="location" name="location" value={filters.location || ''} onChange={handleInputChange} />
             </div>
             <div>
-                <label>Role:</label>
-                <input type="text" name="role" value={filters.jobRole || ''} onChange={handleInputChange} />
+                
+                <input type="text" placeholder="role" name="role" value={filters.jobRole || ''} onChange={handleInputChange} />
             </div>
             <div>
-                <label>Minimum Salary:</label>
-                <input type="number" name="minSalary" value={filters.minSalary || ''} onChange={handleInputChange} />
+                
+                <input type="number" placeholder="Salary" name="minSalary" value={filters.minSalary || ''} onChange={handleInputChange} />
             </div>
             <div>
-                <label>Job Type:</label>
+                
                 <select name="Remote" value={filters.Remote || ''} onChange={handleInputChange}>
-                    <option value="">Select Option</option>
+                    <option value="">Job Type</option>
                     <option value="Remote">Remote</option>
                     <option value="In-Office">In-Office</option>
                     <option value="Hybrid">Hybrid</option>
                 </select>
             </div>
             <div>
-                <label>Company Name:</label>
-                <input type="text" name="companyName" value={filters.companyName || ''} onChange={handleInputChange} />
+                
+                <input type="text" placeholder="Company" name="companyName" value={filters.companyName || ''} onChange={handleInputChange} />
             </div>
-            <button onClick={handleSearch}>Search</button>
+            {/* <button onClick={handleSearch}>Search</button> */}
         </div>
     );
 }

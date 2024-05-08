@@ -1,30 +1,36 @@
-# React + TypeScript + Vite
+# Weekday Assignment: Candidate Application Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
+This project is a candidate application platform built using ReactJs and CSS. It allows users to view job listings, filter jobs based on various criteria, and implement infinite scroll for a seamless browsing experience.
 
-Currently, two official plugins are available:
+## How to Run Locally
+To run this project locally, follow these steps:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone the repository to your local machine:
+ - git clone <repository-url>
 
-## Expanding the ESLint configuration
+2. Navigate to the project directory:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+3. Install the dependencies:
+ - npm install
+4. Start the development Server
+ - npm run dev
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+5. Open your web browser and visit `http://localhost:5173` to view the application.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Project Structure
+- **`src/`**: Contains the source code for the project.
+- **`components/`**: Contains React components used in the application.
+- **`api/`**: Contains the API functions for fetching job data.
+- **`App.ts`**: Main component where the application is initialized.
+- **`index.ts`**: Entry point of the application.
+- **`public/`**: Contains static assets and the HTML file for the application.
+- **`README.md`**: Project documentation and instructions.
+
+## Technologies Used
+- ReactJs: JavaScript library for building user interfaces.
+- CSS: Styling language used for designing the user interface.
+
+
+This README provides instructions for running the project locally. Follow these steps to set up the project environment on your machine and start the development server. If you have any questions, don't hesitate to ask. Happy coding!

@@ -7,7 +7,7 @@ import JobFilter, {FilterValues} from './JobFilter';
 
 const JobList = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [filters, setFilters] = useState<FilterValues>({});
   
@@ -25,24 +25,34 @@ const JobList = () => {
       
     } = filters;
 
+   
+
     // Check if job matches all applied filters
-    if (
-      (minExperience && job.minExp && (job.minExp) > minExperience) ||
-      (minExperience && job.maxExp && (job.maxExp) < minExperience)||
-      (location && !job.location.toLowerCase().includes(location.toLowerCase())) ||
-      (jobRole && !job.jobRole.toLowerCase().includes(jobRole.toLowerCase())) ||
-      (companyName && !job.companyName.toLowerCase().includes(companyName.toLowerCase()))||
-      (minSalary && job.minJdSalary && Number(job.minJdSalary) < minSalary) ||
-      (Remote && job.location && !job.location.toLowerCase().includes(Remote.toLowerCase()=='hybrid' || Remote.toLowerCase()== 'in-office'? '': Remote.toLowerCase()))
-    ) {
-      return false;
-    }
+    // Check if job matches all applied filters
+  if (
+    
+    (minExperience && (job.minExp == null || job.minExp > minExperience)) ||
+   
+    (minExperience && (job.maxExp == null || job.maxExp < minExperience)) ||
+   
+    (location && (job.location == null || !job.location.toLowerCase().includes(location.toLowerCase()))) ||
+    
+    (jobRole && (job.jobRole == null || !job.jobRole.toLowerCase().includes(jobRole.toLowerCase()))) ||
+    
+    (companyName && (job.companyName == null || !job.companyName.toLowerCase().includes(companyName.toLowerCase()))) ||
+   
+    (minSalary && (job.minJdSalary == null || Number(job.minJdSalary) < minSalary)) ||
+    
+    (Remote && job.location && !job.location.toLowerCase().includes(Remote.toLowerCase() === 'hybrid' || Remote.toLowerCase() === 'in-office' ? '' : Remote.toLowerCase()))
+  ) {
+    return false;
+  }
 
     return true;
   };
 
   const loadJobs = async (offset: number) => {
-    setIsLoading(true);
+   
     try {
       const data = await fetchJobsAPI(offset);
       
@@ -51,7 +61,7 @@ const JobList = () => {
     } catch (error) {
       console.error('Error fetching jobs:', error);
     }
-    setIsLoading(false);
+    
   };
 
  
@@ -68,7 +78,7 @@ const JobList = () => {
 
   useEffect(() => {
     observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && !isLoading && hasMore) {
+      if (entries[0].isIntersecting &&  hasMore) {
         loadJobs(jobs.length);
       }
     }, { threshold: 0.5 });
@@ -82,7 +92,7 @@ const JobList = () => {
         observer.current.disconnect();
       }
     };
-  }, [isLoading, hasMore, jobs.length]);
+  }, [ hasMore, jobs.length]);
   
   function onFilterChange(filters: FilterValues){
     setFilters(filters);
@@ -129,7 +139,7 @@ const JobList = () => {
           );
         }
       })}
-      {isLoading && <div>Loading...</div>}
+      
       {!hasMore && <div>No more jobs</div>}
     </div>
     </>

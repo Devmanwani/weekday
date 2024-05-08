@@ -55,13 +55,13 @@
 
 @media screen and (max-width: 926px) {
   .job-card {
-    width: 30%; /* Adjust width for smaller screens */
-    margin: 0 auto; /* Center the card horizontally */
+    width: 30%; 
+    margin: 0 auto; 
   }
 }
 @media screen and (max-width: 768px) {
   .job-card {
-    width: 50%; /* Adjust width for smaller screens */
-    margin: 0 auto; /* Center the card horizontally */
+    width: 50%; 
+    margin: 0 auto;
   }
 }

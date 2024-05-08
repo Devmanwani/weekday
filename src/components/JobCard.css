@@ -1,56 +1,67 @@
-.cardHeader{
+.cardHeader {
   display: flex;
-
 }
 
-.company{
-  font-size:larger;
+.company {
+  font-size: larger;
   font-weight: 700;
-  margin-bottom:2px;
+  margin-bottom: 2px;
 }
 
-.rightHeader{
-  margin-left:10px;
+.rightHeader {
+  margin-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
 }
 
-.logo{
+.logo {
   border-radius: 50%;
   align-items: center;
   justify-content: center;
-  
   height: 60px;
 }
 
 .job-card {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 15px;
-    background-color: #f9f9f9;
-    width: 21vw;
-    height: fit-content;
-    min-height: 50vh;
-    
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #f9f9f9;
+  width: 21vw;
+  height: fit-content;
+  min-height: 50vh;
+}
+
+.job-card h2 {
+  margin-top: 0;
+}
+
+.apply-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.apply-button:hover {
+  background-color: #0056b3;
+}
+
+/* Media query for responsiveness */
+
+
+@media screen and (max-width: 926px) {
+  .job-card {
+    width: 30%; /* Adjust width for smaller screens */
+    margin: 0 auto; /* Center the card horizontally */
   }
-  
-  .job-card h2 {
-    margin-top: 0;
+}
+@media screen and (max-width: 768px) {
+  .job-card {
+    width: 50%; /* Adjust width for smaller screens */
+    margin: 0 auto; /* Center the card horizontally */
   }
-  
-  .apply-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .apply-button:hover {
-    background-color: #0056b3;
-  }
-  
+}

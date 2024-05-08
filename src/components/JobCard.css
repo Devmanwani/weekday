@@ -23,6 +23,7 @@
 }
 
 .job-card {
+  transition: transform 0.3s;
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 15px;
@@ -30,6 +31,11 @@
   width: 21vw;
   height: fit-content;
   min-height: 50vh;
+}
+
+.job-card:hover {
+  transform: scale(1.05); 
+  
 }
 
 .job-card h2 {

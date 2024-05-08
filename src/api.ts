@@ -6,8 +6,8 @@ export interface Job{
     minJdSalary: number;
     SalaryCurrencyCode:string;
     location: string;
-    minExp:string;
-    maxExp:string;
+    minExp:number;
+    maxExp:number;
     jobRole: string;
     companyName: string;
     logoUrl:string;

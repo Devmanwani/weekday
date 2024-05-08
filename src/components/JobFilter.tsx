@@ -2,7 +2,7 @@ import { useState } from "react";
 import './JobFilter.css';
 import { useEffect } from "react";
 
-interface FilterValues {
+export interface FilterValues {
     minExperience?: number;
     location?: string;
     jobRole?: string;
@@ -19,9 +19,15 @@ interface Props {
 const JobFilter = ({ onFilterChange }: Props) => {
     const [filters, setFilters] = useState<FilterValues>({});
 
-    useEffect(()=>{
-        onFilterChange(filters);
-    },[filters])
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            onFilterChange(filters);
+        }, 700); 
+
+        return () => {
+            clearTimeout(timer); 
+        };
+    }, [filters, onFilterChange]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -47,7 +53,7 @@ const JobFilter = ({ onFilterChange }: Props) => {
             </div>
             <div>
                 
-                <input type="text" placeholder="role" name="role" value={filters.jobRole || ''} onChange={handleInputChange} />
+                <input type="text" placeholder="role" name="jobRole" value={filters.jobRole || ''} onChange={handleInputChange} />
             </div>
             <div>
                 

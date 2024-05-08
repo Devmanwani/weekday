@@ -1,7 +1,12 @@
 # Weekday Assignment: Candidate Application Platform
 
+
+
 ## Project Overview
 This project is a candidate application platform built using ReactJs and CSS. It allows users to view job listings, filter jobs based on various criteria, and implement infinite scroll for a seamless browsing experience.
+
+##Deployment
+This project is deployed on vercel,the link is [Vercel Link](https://weekday-phi.vercel.app/).
 
 ## How to Run Locally
 To run this project locally, follow these steps:

@@ -27,7 +27,7 @@ const JobList = () => {
 
    
 
-    // Check if job matches all applied filters
+  
     // Check if job matches all applied filters
   if (
     
@@ -43,10 +43,19 @@ const JobList = () => {
    
     (minSalary && (job.minJdSalary == null || Number(job.minJdSalary) < minSalary)) ||
     
-    (Remote && job.location && !job.location.toLowerCase().includes(Remote.toLowerCase() === 'hybrid' || Remote.toLowerCase() === 'in-office' ? '' : Remote.toLowerCase()))
+    (Remote && job.location && 
+    !job.location.toLowerCase().includes(
+      Remote.toLowerCase() === 'hybrid' || 
+      Remote.toLowerCase() === 'in-office' ? "" : Remote.toLowerCase()))
   ) {
     return false;
   }
+
+  if((Remote?.toLowerCase()==='hybrid'|| Remote?.toLowerCase()==='in-office' )&& job.location.toLowerCase().includes('remote')
+    
+    ){
+      return false;
+    }
 
     return true;
   };
